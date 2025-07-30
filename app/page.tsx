@@ -6,9 +6,9 @@ export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch gap-4">
       {messages.map(message => (
-        <div key={message.id} className="whitespace-pre-wrap">
+        <div key={message.id}>
           {message.role === 'user' ? 'User: ' : 'AI: '}
           {message.parts.map((part, i) => {
             switch (part.type) {
@@ -16,7 +16,7 @@ export default function Chat() {
                 return <div key={`${message.id}-${i}`}>{part.text}</div>;
               case 'tool-invocation':
                 return (
-                  <pre key={`${message.id}-${i}`}>
+                  <pre key={`${message.id}-${i}`} className='text-xs pb-2'>
                     {JSON.stringify(part.toolInvocation, null, 2)}
                   </pre>
                 );
