@@ -1,6 +1,7 @@
 'use client';
 
 import { useChat } from '@ai-sdk/react';
+import ReactMarkdown from 'react-markdown';
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
@@ -13,7 +14,7 @@ export default function Chat() {
           {message.parts.map((part, i) => {
             switch (part.type) {
               case 'text':
-                return <div key={`${message.id}-${i}`}>{part.text}</div>;
+                return <ReactMarkdown key={`${message.id}-${i}`}>{part.text}</ReactMarkdown>;
               case 'tool-invocation':
                 return (
                   <pre key={`${message.id}-${i}`} className='text-xs pb-2'>
