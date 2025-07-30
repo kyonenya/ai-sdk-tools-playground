@@ -12,16 +12,14 @@ export async function POST(req: Request) {
     messages,
     tools: {
       weather: tool({
-        description: 'Get the weather in a location (celsius)',
+        description: 'Get the weather in a location',
         parameters: z.object({
           location: z.string().describe('The location to get the weather for'),
         }),
         execute: async ({ location }) => {
-          const temperature = Math.round(Math.random() * (32 - 0) + 0);
-          return {
-            location,
-            temperature,
-          };
+          const res = await fetch(`https://weather.tsukumijima.net/api/forecast/city/${location}`);
+          if (!res.ok) throw new Error('Failed to fetch weather data');
+          return await res.json();
         },
       }),
     },
