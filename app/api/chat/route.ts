@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     messages,
     tools: {
       weather: tool({
-        description: 'Get the weather in a location',
+        description: '日本の現在の天気を返します。引数 location には一次細分区域（cityタグ）のID（例: 東京→"130010"）を指定してください。',
         parameters: z.object({
           location: z.string().describe('The location to get the weather for'),
         }),
