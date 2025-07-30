@@ -1,23 +1,27 @@
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import ReactMarkdown from 'react-markdown';
+import { useChat } from "@ai-sdk/react";
+import ReactMarkdown from "react-markdown";
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch gap-4">
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id}>
-          {message.role === 'user' ? 'User: ' : 'AI: '}
+          {message.role === "user" ? "User: " : "AI: "}
           {message.parts.map((part, i) => {
             switch (part.type) {
-              case 'text':
-                return <ReactMarkdown key={`${message.id}-${i}`}>{part.text}</ReactMarkdown>;
-              case 'tool-invocation':
+              case "text":
                 return (
-                  <pre key={`${message.id}-${i}`} className='text-xs pb-2'>
+                  <ReactMarkdown key={`${message.id}-${i}`}>
+                    {part.text}
+                  </ReactMarkdown>
+                );
+              case "tool-invocation":
+                return (
+                  <pre key={`${message.id}-${i}`} className="text-xs pb-2">
                     {JSON.stringify(part.toolInvocation, null, 2)}
                   </pre>
                 );
