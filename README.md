@@ -21,10 +21,9 @@ Vercel AI SDK の Tool 機能の素振り
             {
               role: 'system',
               content: [
-              'あなたは一次細分区域の cityMap を知っているアシスタントです。cityMap は以下の JSON 配列形式で提供されます：',
+                'ユーザーが入力した地名から最も近い name を選び、その対応する id を文字列で返してください。',
+                'cityMap は以下の JSON 配列形式で提供されます：',
                 JSON.stringify(cityMap),
-                '',
-                'ユーザーが入力した location（地名）から最も妥当な name を選び、その対応する id を**文字列**だけで返してください。',
               ].join('\n'),
             },
             { role: 'user', content: `location: "${input}"` },
@@ -41,10 +40,12 @@ const result = streamText({
   messages: [
     {
       role: "system",
-      content:
-        `weather ツールは、引数に一次細分区域IDを受け取り、天気取得APIを叩いて生のJSONを返します。あなたは、入力された場所から最も近い地域を下記の「一時細分区域ID一覧」から選んで、そのIDを指定して weather ツールを呼んでください。あなたはその後、天気APIから返ってきたJSONを日本語でわかりやすく要約してください。
-        --- 一時細分区域IDの一覧 ---
-        ${JSON.stringify(cityMap)}`.trim(),
+      content: `
+weather ツールは、引数に一次細分区域IDを受け取り、天気取得APIを叩いて生のJSONを返します。
+あなたは、入力された場所から最も近い地域を下記の「一時細分区域ID一覧」から選んで、そのIDを指定して weather ツールを呼んでください。
+あなたはその後、天気APIから返ってきたJSONを日本語でわかりやすく要約してください。
+--- 一時細分区域IDの一覧 ---
+${JSON.stringify(cityMap)}`.trim(),
     },
     ...messages,
   ],
@@ -68,14 +69,13 @@ const result = streamText({
             { role: 'system', content: 'あなたは日本語で要約するアシスタントです。' },
             {
               role: 'user', 
-              content: `以下は天気APIのレスポンスです。場所名・天気 (telop)・最高／最低気温を抜き出して、日本語で手短に要約してください。データ:${JSON.stringify(data)}`.trim() },
+              content: `
+以下は天気APIのレスポンスです。場所名・天気 (telop)・最高／最低気温を抜き出して、日本語で手短に要約してください。
+データ:${JSON.stringify(data)}`.trim()},
           ],
         });
         const summary = sumRes.choices?.[0]?.message?.content;
         /* ... */
-      },
-    }),
-  },
 ```
 
 #### ◎ マルチステップ呼び出しを使う
@@ -86,8 +86,8 @@ const result = streamText({
   messages: [
     {
       role: "system",
-      content:
-        `weather ツールは天気データの生JSONを返すので、あなたはそのJSONを日本語でわかりやすく要約してください。
+      content: `
+weather ツールは天気データの生JSONを返すので、あなたはそのJSONを日本語でわかりやすく要約してください。`
     },
     ...messages,
   ],
