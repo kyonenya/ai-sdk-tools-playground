@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "biome format --write app",
+    "tsc": "tsc -w --noEmit",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
@@ -18,8 +19,8 @@
     "@opennextjs/cloudflare": "^1.5.3",
     "ai": "^4.3.19",
     "next": "15.3.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-markdown": "^10.1.0",
     "zod": "^3.25.76"
   },
@@ -27,7 +28,7 @@
     "@biomejs/biome": "2.1.3",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.19.9",
+    "@types/node": "^24.1.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

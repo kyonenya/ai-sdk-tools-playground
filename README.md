@@ -98,6 +98,8 @@ weather ツールは天気データの生JSONを返すので、あなたはそ�
 
 ## 参考
 
+- Cloudflare で MCP サーバーを立てる：[Playwright MCP · ブラウザレンダリング - Cloudflare](https://developers.cloudflare.com/browser-rendering/platform/playwright-mcp/)
+- Playwright MCP：[Vercel AI SDK で MCP クライアントをツールとして利用する](https://azukiazusa.dev/blog/vercel-ai-sdk-mcp-client/#mcp-%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)
 - マルチステップ呼び出し公式：[AI SDK: ツール呼び出し](https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling#multi-step-calls-using-maxsteps)
 - 検索エンジン：[【エージェント実装の第一歩】Vercel AI SDK のツール機能を使いこなす](https://zenn.dev/kikagaku/articles/14b51ea07b46c6)
 - 基礎：[Vercel AI SDK で AIモデルごとのSDKに依存しないアプリを実装しよう！](https://zenn.dev/nomhiro/articles/poc-vercel-ai-sdk)
