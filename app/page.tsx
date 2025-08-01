@@ -22,7 +22,9 @@ export default function Chat() {
               case "tool-invocation":
                 return (
                   <details key={`${message.id}-${i}`} className="pb-2">
-                    <summary>API Response (Click to expand)</summary>
+                    <summary className="secondary-text">
+                      API Response (Click to expand)
+                    </summary>
                     <pre className="text-xs">
                       {JSON.stringify(part.toolInvocation, null, 2)}
                     </pre>
