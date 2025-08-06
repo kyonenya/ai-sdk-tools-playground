@@ -5,6 +5,16 @@ import cityMap from "./cityMap.json";
 
 export const maxDuration = 30;
 
+/**
+ * @see https://v4.ai-sdk.dev/docs/troubleshooting/use-chat-an-error-occurred#usechat-an-error-occurred
+ */
+function errorHandler(error: unknown) {
+  if (error == null) return "unknown error";
+  if (typeof error === "string") return error;
+  if (error instanceof Error) return error.message;
+  return JSON.stringify(error);
+}
+
 export async function POST(req: Request) {
   const { messages } = (await req.json()) as { messages: CoreMessage[] };
 
@@ -43,5 +53,7 @@ export async function POST(req: Request) {
     },
   });
 
-  return result.toDataStreamResponse();
+  return result.toDataStreamResponse({
+    getErrorMessage: errorHandler,
+  });
 }
