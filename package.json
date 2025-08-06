@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "opennextjs-cloudflare build",
+    "deploy": "opennextjs-cloudflare deploy",
     "start": "next start",
     "lint": "next lint",
     "format": "biome format --write app",
     "tsc": "tsc -w --noEmit",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
   },
