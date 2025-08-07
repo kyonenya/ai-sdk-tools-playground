@@ -1,5 +1,10 @@
 import { openai } from "@ai-sdk/openai";
-import { streamText, tool, CoreMessage } from "ai";
+import {
+  streamText,
+  tool,
+  CoreMessage,
+  experimental_createMCPClient as createMCPClient,
+} from "ai";
 import { z } from "zod";
 import cityMap from "./cityMap.json";
 
@@ -17,6 +22,14 @@ function errorHandler(error: unknown) {
 
 export async function POST(req: Request) {
   const { messages } = (await req.json()) as { messages: CoreMessage[] };
+
+  const mcpClient = await createMCPClient({
+    transport: {
+      type: "sse",
+      url: "https://playwright-mcp-example.kyonenya.workers.dev/sse",
+    },
+  });
+  const mcpTools = await mcpClient.tools();
 
   const result = streamText({
     model: openai("gpt-4.1"),
@@ -50,6 +63,10 @@ export async function POST(req: Request) {
           return await res.json();
         },
       }),
+      ...mcpTools,
+    },
+    onFinish: () => {
+      mcpClient.close();
     },
   });
 
