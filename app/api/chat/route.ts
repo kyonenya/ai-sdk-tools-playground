@@ -7,8 +7,10 @@ import {
 } from "ai";
 import { z } from "zod";
 import cityMap from "./cityMap.json";
+import { AgenticToolClient } from "@agentic/platform-tool-client";
+import { createAISDKTools } from "@agentic/ai-sdk";
 
-export const maxDuration = 30;
+export const maxDuration = 90;
 
 /**
  * @see https://v4.ai-sdk.dev/docs/troubleshooting/use-chat-an-error-occurred#usechat-an-error-occurred
@@ -30,6 +32,10 @@ export async function POST(req: Request) {
     },
   });
   const mcpTools = await mcpClient.tools();
+
+  const searchClient =
+    await AgenticToolClient.fromIdentifier("@agentic/search");
+  const searchTools = createAISDKTools(searchClient);
 
   const result = streamText({
     model: openai("gpt-4.1"),
@@ -64,6 +70,7 @@ export async function POST(req: Request) {
         },
       }),
       ...mcpTools,
+      ...searchTools,
     },
     onFinish: () => {
       mcpClient.close();
