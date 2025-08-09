@@ -7,7 +7,7 @@ export default function Chat() {
   const { messages, sendMessage } = useChat();
 
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch gap-4">
+    <div className="flex flex-col w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl py-24 px-4 sm:px-6 mx-auto stretch gap-4">
       {messages.map((message) => (
         <div key={message.id}>
           {message.role === "user" ? "User: " : "AI: "}
@@ -52,7 +52,7 @@ export default function Chat() {
       >
         <input
           name="user-input"
-          className="fixed dark:bg-zinc-900 bottom-0 w-full max-w-md p-2 mb-8 border border-zinc-300 dark:border-zinc-800 rounded shadow-xl"
+          className="fixed dark:bg-zinc-900 bottom-0 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-2 mb-8 border border-zinc-300 dark:border-zinc-800 rounded shadow-xl"
           placeholder="Say something..."
         />
       </form>
