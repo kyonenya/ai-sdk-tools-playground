@@ -49,7 +49,7 @@ export async function POST(req: Request) {
   } as const;
 
   const result = streamText({
-    model: openai("gpt-4.1"),
+    model: openai("gpt-5"),
     stopWhen: stepCountIs(2),
     system:
       `weather ツールは、引数に一次細分区域IDを受け取り、天気取得APIを叩いて生のJSONを返します。あなたは、入力された場所から最も近い地域を下記の「一時細分区域ID一覧」から選んで、そのIDを指定して weather ツールを呼んでください。あなたはその後、天気APIから返ってきたJSONを日本語でわかりやすく要約してください。
